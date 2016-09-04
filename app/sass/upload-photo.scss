@@ -1,0 +1,27 @@
+.camera-modal {
+  width: 352px;
+  margin: 30px auto;
+  
+  .my-camera,
+  .my-result {
+    width: 320px;
+    height: 320px;
+  }
+  
+  .my-result {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .modal-body {
+    padding: 0;
+    margin: 15px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+    .camera-modal {
+      width: 352px;
+    }
+}

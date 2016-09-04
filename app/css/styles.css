@@ -1,0 +1,75 @@
+body {
+  background: #fff;
+  font-family: 'PT Sans', 'Helvetica Neue', Arial, sans-serif; }
+
+.navbar {
+  background-color: #313131;
+  padding: 0;
+  border-radius: 0;
+  color: #fff; }
+  .navbar .update-image-btn {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.08);
+    margin: 0px auto; }
+    .navbar .update-image-btn span {
+      color: #fff;
+      font-size: 20px;
+      top: 14px;
+      left: 16px; }
+    .navbar .update-image-btn:hover {
+      background-color: rgba(255, 255, 255, 0.12); }
+  .navbar .logout {
+    position: absolute;
+    right: 10px;
+    top: 10px; }
+
+.users-wrapper {
+  position: absolute;
+  width: 100%;
+  top: 50px;
+  left: 0;
+  height: calc(100% - 50px);
+  height: -o-calc(100% - 50px);
+  /* opera */
+  height: -webkit-calc(100% - 50px);
+  /* google, safari */
+  height: -moz-calc(100% - 50px);
+  /* firefox */ }
+
+.users {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); }
+  .users .user {
+    background-color: #f7f7f7;
+    width: 160px;
+    height: 130px;
+    margin: 10px;
+    display: inline-block; }
+    .users .user img {
+      width: 100%; }
+
+.camera-modal {
+  width: 352px;
+  margin: 30px auto; }
+  .camera-modal .my-camera,
+  .camera-modal .my-result {
+    width: 320px;
+    height: 320px; }
+  .camera-modal .my-result {
+    position: absolute;
+    top: 0;
+    left: 0; }
+  .camera-modal .modal-body {
+    padding: 0;
+    margin: 15px; }
+
+@media screen and (min-width: 768px) {
+  .camera-modal {
+    width: 352px; } }

@@ -1,0 +1,34 @@
+.users-wrapper {
+  position: absolute;
+  width: 100%;
+  top: 50px;
+  left: 0;
+  height: calc(100% - 50px);
+  height: -o-calc(100% - 50px); /* opera */
+  height: -webkit-calc(100% - 50px); /* google, safari */
+  height: -moz-calc(100% - 50px); /* firefox */
+}
+
+.users {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  
+  // Users grid positioning
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  
+  .user {
+    background-color: #f7f7f7;
+    width: 160px;
+    height: 130px;
+    margin: 10px;
+    display: inline-block;
+    
+    img {
+      width: 100%;
+    }
+  }
+}

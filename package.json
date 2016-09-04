@@ -1,0 +1,44 @@
+{
+  "name": "Presence",
+  "version": "1.0.0",
+  "description": "Keep remote teams connected with visual presence and instant conversations",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eric Bieller",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "browserify": "^13.0.0",
+    "delorean": "^0.9.3",
+    "envs": "^0.1.6",
+    "es6-promise": "^3.2.1",
+    "express": "^4.13.4",
+    "express-session": "^1.14.0",
+    "getusermedia": "^2.0.0",
+    "guid": "0.0.12",
+    "gulp": "^3.9.1",
+    "jquery": "^2.2.4",
+    "jsonwebtoken": "^5.0.1",
+    "mongoose": "^4.4.19",
+    "passport-auth0": "^0.5.2",
+    "pusher": "^1.3.0",
+    "react": "^0.14.8",
+    "react-bootstrap": "^0.30.2",
+    "react-dom": "^0.14.7",
+    "reactify": "^1.1.1",
+    "underscore": "^1.8.3",
+    "webcamjs": "^1.0.10",
+    "react-google-login": "2.1.2"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-react": "^6.11.1",
+    "grunt": "^0.4.5",
+    "grunt-react": "^0.12.3",
+    "gulp-environments": "^0.1.1",
+    "gulp-sass": "^2.3.2",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

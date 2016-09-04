@@ -1,0 +1,36 @@
+body {
+  background: #fff;
+  font-family: 'PT Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.navbar {
+  background-color: $dark-gray;
+  padding: 0;
+  border-radius: 0;
+  color: #fff;
+  
+  .update-image-btn {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255,255,255,.08);
+    margin: 0px auto;
+    
+    span {
+      color: #fff;
+      font-size: 20px;
+      top: 14px;
+      left: 16px;
+    }
+    
+    &:hover {
+      background-color: rgba(255,255,255,.12);
+    }
+  }
+  
+  .logout {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+}

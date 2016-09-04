@@ -1,0 +1,18 @@
+{
+  "name": "Presence",
+  "description": "Keep remote teams connected with visual presence and instant conversations",
+  "main": "main.js",
+  "authors": [
+    "Eric Bieller"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
