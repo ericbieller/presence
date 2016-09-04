@@ -19,12 +19,14 @@ function createSession(req, res) {
 
   var user = User.findOne({email: email}, function(err, user) {
     if (user) {
+      var user = user.toObject();
       if (!bcrypt.compareSync(password, user.password)){
         return res.status(401).send("Invalid username / password combo!");
       }
       // Save user session data
-      req.session.user_id = user.id;
+      req.session.user_id = user._id;
       req.session.email = email;
+      req.session.name = user.name;
       
       res.status(201).send({
         id_token: createToken(user)

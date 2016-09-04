@@ -5,6 +5,7 @@ var UsersStore = require('../stores/users-store');
 var Users = require('./users.jsx');
 var AppHeader = require('./app-header.jsx');
 var UpdatePhoto = require('./update-photo.jsx');
+var Banner = require('./banner.jsx');
 var _ = require('underscore');
 
 var App = React.createClass({

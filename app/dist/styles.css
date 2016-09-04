@@ -1,6 +1,24 @@
+input[type=text].form-control,
+input[type=password].form-control,
+input[type=email].form-control {
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid #ECECEC;
+  font-size: 16px; }
+
+.btn-primary {
+  border: none;
+  color: #fff;
+  background-color: #1D977C; }
+  .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+    background-color: #19826a; }
+
 body {
   background: #fff;
-  font-family: 'PT Sans', 'Helvetica Neue', Arial, sans-serif; }
+  color: #363636;
+  font-family: 'Avenir', 'PT Sans', 'Helvetica Neue', Arial, sans-serif; }
 
 .navbar {
   background-color: #313131;
@@ -39,21 +57,30 @@ body {
   /* firefox */ }
 
 .users {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%); }
+  text-align: center; }
   .users .user {
-    background-color: #f7f7f7;
-    width: 160px;
-    height: 130px;
     margin: 10px;
-    display: inline-block; }
+    display: inline-block;
+    text-align: center;
+    max-width: 270px; }
     .users .user img {
-      width: 100%; }
+      width: 100%;
+      border-radius: 3px;
+      height: auto; }
+    .users .user .name {
+      font-size: 16px;
+      font-weight: 400; }
+    .users .user .user-status {
+      width: 10px;
+      height: 10px;
+      background-color: #7ED321;
+      border-radius: 5px;
+      box-shadow: 0px 0px 0px 6px #fff;
+      margin: 0px auto;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 4px;
+      margin-top: -4px; }
 
 .camera-modal {
   width: 352px;
@@ -73,3 +100,13 @@ body {
 @media screen and (min-width: 768px) {
   .camera-modal {
     width: 352px; } }
+
+.login-signup .well {
+  margin-top: 200px;
+  background: none;
+  border: none;
+  box-shadow: none; }
+  .login-signup .well .btn {
+    width: 100%;
+    border-radius: 2px;
+    margin-top: 20px; }

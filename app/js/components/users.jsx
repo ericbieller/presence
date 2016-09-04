@@ -14,7 +14,14 @@ var Users = React.createClass({
       list.push(<UserItem key={userObj.id} item={userObj} />);
     }
     
-    return <ul className="users">{list}</ul>
+    return <div className="users">
+      {list}
+    </div>
+  },
+  
+  componentDidMount: function() {
+    
+   
   }
 });
 

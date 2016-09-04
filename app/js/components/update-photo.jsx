@@ -25,7 +25,7 @@ var UpdatePhoto = React.createClass({
       $('.my-result').html('<img src="'+data_uri+'"/>');
       
       // Update user snapshot
-      current_user = UsersStore.getCurrentUser();
+      var current_user = UsersStore.getCurrentUser();
       UserActions.updateSnapshot({id: current_user.id, snapshot: data_uri});
     });
   },

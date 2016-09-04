@@ -19,15 +19,16 @@ module.exports = Flux.createStore({
     
     // Populate current user
     var current_user = UserStore.user;
-    this.items[current_user.id] = { id: current_user.id, email: current_user.email, snapshot: current_user.snapshot, me: true }
+    this.items[current_user.id] = { id: current_user.id, email: current_user.email, name: current_user.name, snapshot: current_user.snapshot, me: true }
     
     var me = false;
     var self = this;
     
-    // Populate users-store with current users in 
+    // Populate users-store with current users logged in 
     _.each(data.members, function(member, user_id) {
       if (current_user.id != user_id) {
-        self.items[user_id] = { id: user_id, email: member.email, me: false};
+        console.log(member)
+        self.items[user_id] = { id: user_id, email: member.email, name: member.name, me: false};
       }
     });
     
@@ -36,7 +37,7 @@ module.exports = Flux.createStore({
   
   userAdded: function(data) {
     console.log('adding user to store');
-    this.items[data.id] = { id: data.id, email: data.info.email, snapshot: null, me: false };
+    this.items[data.id] = { id: data.id, email: data.info.email, name: data.info.name, snapshot: null, me: false };
     this.emit('change');
   },
   

@@ -1,12 +1,15 @@
 var React = require('react/addons');
+var Flux = require('delorean').Flux;
 var ReactDOM = require('react-dom')
 var AppActions = require('../actions/app-actions.js');
 var Auth = require('../services/auth-service');
-var GoogleLogin = require('react-google-login');
+var Banner = require('./banner.jsx');
 import { Link } from 'react-router'
 
 var Login = React.createClass({
-  mixins: [React.addons.LinkedStateMixin],
+  mixins: [React.addons.LinkedStateMixin, Flux.mixins.storeListener],
+  
+  watchStores: ['authStore'],
   
   getInitialState: function() {
     return {
@@ -31,17 +34,36 @@ var Login = React.createClass({
   render: function() {
     var email = this.state.email;
     var password = this.state.password;
+    var auth = this.getStore('authStore');
+    
+    if (auth.error) {
+      var error = <div className="alert alert-danger">
+                    {auth.error}
+                  </div>
+    }
 
     return (
-      <div>
-      <Link to="faces">Login route</Link>
-      <form role="form">
-        <div className="form-group">
-          <input type="text" value={email} onChange={this.handleEmailChange} placeholder="Email" />
-          <input type="password" vaue={password} onChange={this.handlePasswordChange} placeholder="Password" />
+      <div className="login-signup">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-6 col-sm-offset-3">
+              <div className="well">
+                <form role="form">
+                  {error}
+                  <div className="form-group">
+                    <div className="form-group">
+                      <input className="form-control" type="text" value={email} onChange={this.handleEmailChange} placeholder="Email" />
+                    </div>
+                    <div className="form-group">
+                      <input className="form-control" type="password" vaue={password} onChange={this.handlePasswordChange} placeholder="Password" />
+                    </div>
+                  </div>
+                  <button className="btn btn-primary btn-lg" type="submit" onClick={this.handleSubmit}>Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-        <button type="submit" onClick={this.handleSubmit}>Submit</button>
-      </form>
       </div>);
   }
 });

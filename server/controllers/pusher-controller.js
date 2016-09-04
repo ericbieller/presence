@@ -13,13 +13,15 @@ router.route("/pusher/auth").post(auth);
 function auth(req, res) {
   user_id = req.session.user_id;
   email = req.session.email;
+  user_name = req.session.name;
     
   var socketId = req.body.socket_id;
   var channel = req.body.channel_name;
   var presenceData = {
     user_id: user_id,
     user_info: {
-      email: email
+      email: email,
+      name: user_name
     }
   };
   var auth = pusher.authenticate(socketId, channel, presenceData);

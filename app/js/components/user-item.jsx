@@ -3,10 +3,11 @@ var UserStore = require('../stores/user-store');
 
 var UserItem = React.createClass({
   render: function() {
-    return (<li className="user">
-      <img src={this.props.item.snapshot} />
-    <span>{this.props.item.email}</span>
-    </li>)
+    return <div className="user">
+        <img src={this.props.item.snapshot} />
+        <div className="user-status"></div>
+        <div className="name">{this.props.item.name}</div>
+      </div>
   }
 });
 

@@ -2,13 +2,15 @@ var Flux = require('delorean').Flux;
 var AppStore = require('../stores/app-store');
 var UserStore = require('../stores/user-store');
 var UsersStore = require('../stores/users-store');
+var AuthStore = require('../stores/auth-store');
 
 var AppDispatcher = Flux.createDispatcher({
     getStores: function() {
         return {
             appStore: AppStore,
             userStore: UserStore,
-            usersStore: UsersStore
+            usersStore: UsersStore,
+            authStore: AuthStore
         }
     }
 });

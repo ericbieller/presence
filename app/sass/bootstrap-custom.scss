@@ -1,0 +1,24 @@
+input[type=text],
+input[type=password],
+input[type=email] {
+  &.form-control {
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #ECECEC;
+    font-size: 16px;
+  }
+}
+
+.btn-primary {
+  border: none;
+  color: #fff;
+  background-color: #1D977C;
+  
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: darken(#1D977C, 5%);
+  }
+}

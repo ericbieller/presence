@@ -10,25 +10,45 @@
 }
 
 .users {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  //margin: 0;
+  //padding: 0;
+  //list-style: none;
   
   // Users grid positioning
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  //position: absolute;
+  //left: 50%;
+  //top: 50%;
+  //transform: translate(-50%, -50%);
+  text-align: center;
   
   .user {
-    background-color: #f7f7f7;
-    width: 160px;
-    height: 130px;
     margin: 10px;
     display: inline-block;
+    text-align: center;
+    max-width: 270px;
     
     img {
       width: 100%;
+      border-radius: 3px;
+      height: auto;
+    }
+    
+    .name {
+      font-size: 16px;
+      font-weight: 400;
+    }
+    
+    .user-status {
+      width: 10px;
+      height: 10px;
+      background-color: #7ED321;
+      border-radius: 5px;
+      box-shadow: 0px 0px 0px 6px #fff;
+      margin: 0px auto;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 4px;
+      margin-top: -4px;
     }
   }
 }

@@ -1,6 +1,7 @@
 var $ = require("jquery");
 var promise = require("es6-promise");
 var UserActions = require("../actions/user-actions.js");
+var AuthActions = require("../actions/auth-actions.js");
 var resourceUrl = "/api/sessions/create";
 var bcrypt = require('bcryptjs');
 
@@ -18,7 +19,10 @@ module.exports = {
               var token = response.id_token;
               UserActions.login(token);
             },
-            error: reject
+            error: function(response) {
+              console.log("error: " + response.responseText)
+              AuthActions.showError(response.responseText);
+            }
         });
     });
   }
