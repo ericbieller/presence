@@ -82,6 +82,17 @@ body {
       margin-bottom: 4px;
       margin-top: -4px; }
 
+.camera-modal .counter {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  font-size: 100px;
+  font-weight: bold;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  opacity: .85; }
+
 .camera-modal {
   width: 352px;
   margin: 30px auto; }

@@ -14,6 +14,19 @@ var UpdatePhoto = React.createClass({
   handleCamera: function(e) {
     e.preventDefault();
     this.setState({showModal: true});
+    
+    var countdown = setInterval(function() {
+      var $counter = $(".counter");
+      var current = $counter.text();
+
+      $counter.text(current-1);
+      
+      if (current == 1) {
+        $counter.hide();
+        clearInterval(countdown);
+      }
+    }, 1000)
+    
     $('.camera-modal').on('shown', function () {
       Webcam.attach('.my-camera');
     });
@@ -73,6 +86,7 @@ var UpdatePhoto = React.createClass({
                 <Modal.Body>
                   <div className="my-camera"></div>
                   <div className="my-result"></div>
+                  <div className="counter">3</div>
                 </Modal.Body>
               </Modal>
               
@@ -82,7 +96,8 @@ var UpdatePhoto = React.createClass({
             </div>)
   },
   
-  componentWillUpdate: function() {
+  componentDidMount: function() {
+
   }
 });
 
