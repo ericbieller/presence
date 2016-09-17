@@ -28,8 +28,6 @@ function createSession(req, res) {
       req.session.email = email;
       req.session.name = user.name;
       
-      console.log(user);
-      
       res.status(201).send({
         id_token: createToken(user)
       });

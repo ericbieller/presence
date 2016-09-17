@@ -21,11 +21,13 @@ var UserActions = {
     },
     
     logout: function() {
+      var current_user = UserStore.user;
+      
       // Remove token from local storage
       localStorage.removeItem('token');
       
       // Disconnect pusher
-      this.pusher.unsubscribe('presence-test_channel2');
+      this.pusher.unsubscribe('presence-' + current_user.organization_id);
       
       // Show app now that user is logged in
       AppDispatcher.dispatch('app.show', 'login');
@@ -73,8 +75,10 @@ var UserActions = {
     },
     
     connectPusher: function() {
+      var current_user = UserStore.user;
+      
       // Subscribe to presence channel
-      this.channel = this.pusher.subscribe('presence-test_channel2');
+      this.channel = this.pusher.subscribe('presence-' + current_user.organization_id);
         
       var self = this;
       this.channel.bind('pusher:subscription_succeeded', function(data) {
