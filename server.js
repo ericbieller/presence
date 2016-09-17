@@ -18,7 +18,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }))
-app.use(express.static(path.join(__dirname, "app/dist")));
+app.use(express.static(path.join(__dirname, "dist")));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 app.use("/api", AuthController);
 app.use("/api", PusherController);
 app.get('*', function (request, response){
-  response.sendFile(path.resolve(__dirname, 'app/dist', 'index.html'));
+  response.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(7777, function () {

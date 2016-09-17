@@ -1,62 +1,126 @@
-var gulp = require("gulp");
-var sass = require('gulp-sass');
-var environments = require('gulp-environments');
-var browserify = require("browserify");
-var reactify = require("reactify");
-var babelify = require("babelify");
-var source = require("vinyl-source-stream");
+var source = require('vinyl-source-stream');
+var gulp = require('gulp');
+var gutil = require('gulp-util');
+var browserify = require('browserify');
+var babelify = require('babelify');
+var watchify = require('watchify');
+var notify = require('gulp-notify');
 
-var development = environments.development;
-var production = environments.production;
+var stylus = require('gulp-stylus');
+var autoprefixer = require('gulp-autoprefixer');
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
+var buffer = require('vinyl-buffer');
 
-if (production()) {
-  var env = "production";
+var browserSync = require('browser-sync');
+var reload = browserSync.reload;
+var historyApiFallback = require('connect-history-api-fallback')
+
+var sass = require('gulp-sass')
+var concat = require('gulp-concat')
+
+/*
+  Styles Task
+*/
+
+/*gulp.task('styles',function() {
+  // move over fonts
+
+  gulp.src('css/fonts/**.*')
+    .pipe(gulp.dest('build/css/fonts'))
+
+  // Compiles CSS
+  gulp.src('css/style.styl')
+    .pipe(stylus())
+    .pipe(autoprefixer())
+    .pipe(gulp.dest('./build/css/'))
+    .pipe(reload({stream:true}))
+});*/
+
+/*
+  Images
+*/
+/*gulp.task('images',function(){
+  gulp.src('css/images/**')
+    .pipe(gulp.dest('./build/css/images'))
+});*/
+
+/*
+  Browser Sync
+*/
+/*gulp.task('browser-sync', function() {
+    browserSync({
+        // we need to disable clicks and forms for when we test multiple rooms
+        server : {},
+        middleware : [ historyApiFallback() ],
+        ghostMode: false
+    });
+});*/
+
+function handleErrors() {
+  var args = Array.prototype.slice.call(arguments);
+  notify.onError({
+    title: 'Compile Error',
+    message: '<%= error.message %>'
+  }).apply(this, args);
+  this.emit('end'); // Keep gulp from hanging on this task
 }
 
-if (development()) {
-  var env = "development";
+function buildScript(file, watch) {
+  var props = {
+    entries: ['./app/js/' + file],
+    debug : true,
+    cache: {},
+    packageCache: {},
+    transform:  [babelify.configure({presets: ["es2015", "react"]})]
+  };
+
+  // watchify() if watch requested, otherwise run browserify() once 
+  var bundler = watch ? watchify(browserify(props)) : browserify(props);
+
+  function rebundle() {
+    var stream = bundler.bundle();
+    return stream
+      .on('error', handleErrors)
+      .pipe(source(file))
+      // If you also want to uglify it
+      // .pipe(buffer())
+      // .pipe(uglify())
+      .pipe(rename('main.js'))
+      .pipe(gulp.dest('./dist'))
+      // .pipe(gulp.dest('./build'))
+      .pipe(reload({stream:true}))
+  }
+
+  // listen for an update and run rebundle
+  bundler.on('update', function() {
+    rebundle();
+    gutil.log('Rebundle...');
+  });
+
+  // run it once the first time buildScript is called
+  return rebundle();
 }
 
-gulp.task("config", function() {
-  console.log("./app/js/config/" + env + ".js");
-  return gulp.src("./app/js/config/" + env + ".js")
-        .pipe(source("app/js/config.js"))
+gulp.task('scripts', function() {
+  return buildScript('main.jsx', false); // this will run once because we set watch to false
 });
 
-gulp.task("bundle", function () {
-    return browserify({
-        entries: ["./app/js/bootstrap.js", "./app/js/main.jsx"],
-        debug: true
-    }).transform(babelify, {presets: ["es2015", "react"]})
-        .bundle()
-        .pipe(source("main.js"))
-        .pipe(gulp.dest("app/dist"))
+gulp.task('copy', function(){
+  console.log('COPY');
+  gulp.src('app/index.html')
+    .pipe(gulp.dest('dist'));
 });
 
-gulp.task("copy", ["bundle"], function () {
-    return gulp.src(["app/index.html","app/css/*.css"])
-        .pipe(gulp.dest("app/dist"));
+gulp.task('sass', function () {
+  return gulp.src('app/sass/**/*.scss')
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(concat('main.css'))
+    .pipe(gulp.dest('./dist'));
 });
 
-gulp.task("copy-styles", ["styles"], function () {
-    return gulp.src(["app/index.html","app/css/*.css"])
-        .pipe(gulp.dest("app/dist"));
+// run 'scripts' task first, then watch for future changes
+gulp.task('default', ['copy', 'sass', 'scripts'], function() {
+  gulp.watch(['app/index.html', 'app/sass/**/*.scss'], ['copy', 'sass']); // gulp watch for stylus changes
+  return buildScript('main.jsx', true); // browserify watch for JS changes
 });
-
-gulp.task('styles', function() {
-    gulp.src('app/sass/styles.scss')
-        .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('app/css/'));
-});
-
-gulp.task("default",["copy"],function(){
-   console.log("Gulp completed..."); 
-});
-
-gulp.task('watch',function() {
-    gulp.watch(['app/sass/**/*.scss', 'app/index.html'],['copy-styles']);
-    gulp.watch('app/js/**/*.*',['copy']);
-});
-//gulp.task('default', ['copy'], function() {
-  //gulp.watch(['app/index.html', 'app/**/*.jsx', 'app/**/*.js'], ['copy']);
-//});
