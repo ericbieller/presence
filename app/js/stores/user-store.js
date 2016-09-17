@@ -10,6 +10,7 @@ module.exports = Flux.createStore({
       password: '',
       token: null,
       snapshot: localStorage.getItem('snapshot'),
+      organization_id: null
     },
     /*user: {
       snapshot: localStorage.getItem('snapshot');
@@ -27,6 +28,7 @@ module.exports = Flux.createStore({
       this.user.email = userInfo.email;
       this.user.token = userInfo.token;
       this.user.name = userInfo.name;
+      this.user.organization_id = userInfo.organization_id;
     },
     
     updateSnapshot: function(data) {

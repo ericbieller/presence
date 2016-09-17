@@ -12,9 +12,6 @@ var App = React.createClass({
   render: function() {
     var users = UsersStore.items;
     
-    // What the hell triggers this twice? Some update being called
-    console.log('rendering app');
-    
     return (<div>
         <AppHeader />
         <Users items={users} />

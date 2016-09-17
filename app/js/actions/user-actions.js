@@ -7,7 +7,6 @@ var UserActions = {
     login: function(token) {      
       // Save token in local storage
       localStorage.setItem('token', token);
-      console.log(token);
 
       // Save user deets and show app now that user is logged in
       AppDispatcher.dispatch('user.login', token);

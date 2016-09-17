@@ -1,4 +1,4 @@
-console.log('ENV CONFIG bLOADED');
+console.log('ENV CONFIG LOADED');
 
 module.exports = {
   "environment": "development",
