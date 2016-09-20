@@ -16,6 +16,13 @@ var App = React.createClass({
         <AppHeader />
         <Users items={users} />
       </div>);
+  },
+  
+  componentDidMount: function() {
+    // Setup event for tracking user's system idle status
+    addEventListener('update-state', function(e) {
+        console.log(e.detail.state)
+    });
   }
 });
 

@@ -65,7 +65,7 @@ var Login = React.createClass({
                       <input className="form-control" type="password" vaue={password} onChange={this.handlePasswordChange} placeholder="Password" />
                     </div>
                   </div>
-                  <button className="btn btn-primary btn-lg" type="submit" onClick={this.handleSubmit}>Submit</button>
+                  <button className="btn btn-primary btn-lg" type="submit" onClick={this.handleSubmit}>Log in!</button>
                 </form>
                 <div className="secondary-action"><a href="#" onClick={this.handleCreateAccount}>Create an Account</a></div>
               </div>

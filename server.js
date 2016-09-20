@@ -4,7 +4,6 @@ var mongoose = require("mongoose");
 var path = require("path");
 var session = require("express-session");
 var Router = require('react-router')
-//var routes = require('./routes')
 
 //controllers
 var AuthController = require("./server/controllers/auth-controller");

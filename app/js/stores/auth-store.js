@@ -6,12 +6,10 @@ module.exports = Flux.createStore({
     },
     
     actions: {
-      'autherror.show':       'showError'
+      'autherror.show': 'showError'
     },
     
     showError: function(message) {
-      console.log('ERROR');
-      console.log(message);
       this.set({error: message})
     }
 });
