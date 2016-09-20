@@ -15,11 +15,6 @@ var Users = React.createClass({
     return <div className="users">
       {list}
     </div>
-  },
-  
-  componentDidMount: function() {
-    
-   
   }
 });
 

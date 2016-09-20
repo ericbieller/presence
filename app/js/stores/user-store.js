@@ -10,15 +10,14 @@ module.exports = Flux.createStore({
       password: '',
       token: null,
       snapshot: localStorage.getItem('snapshot'),
-      organization_id: null
+      organization_id: null,
+      idle_status: 'active'
     },
-    /*user: {
-      snapshot: localStorage.getItem('snapshot');
-    },*/
     
     actions: {
-      'user.login':            'update',
-      'snapshot.updated':      'updateSnapshot'
+      'user.login':               'update',
+      'snapshot.updated':         'updateSnapshot',
+      'user.update_idle_status':  'updateIdleStatus'
     },
     
     update: function(token) {
@@ -37,5 +36,9 @@ module.exports = Flux.createStore({
         this.user.snapshot = data.snapshot;      
         this.emit('change');
       }
+    },
+    
+    updateIdleStatus: function(data) {
+      this.user.idle_status = data.idle_status;
     }
 });

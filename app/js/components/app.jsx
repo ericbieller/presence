@@ -6,6 +6,7 @@ var Users = require('./users.jsx');
 var AppHeader = require('./app-header.jsx');
 var UpdatePhoto = require('./update-photo.jsx');
 var Banner = require('./banner.jsx');
+var UserActions = require("../actions/user-actions.js");
 var _ = require('underscore');
 
 var App = React.createClass({
@@ -21,7 +22,8 @@ var App = React.createClass({
   componentDidMount: function() {
     // Setup event for tracking user's system idle status
     addEventListener('update-state', function(e) {
-        console.log(e.detail.state)
+      var current_user = UsersStore.getCurrentUser();
+      UserActions.updateIdleStatus({user_id: current_user.id, idle_status: e.detail.idle_status});
     });
   }
 });

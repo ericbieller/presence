@@ -6,10 +6,11 @@ module.exports = Flux.createStore({
   items: {},
   
   actions: {
-    'channel.joined':      'channelJoined',
-    'user.added':        'userAdded',
-    'user.removed':      'userRemoved',
-    'snapshot.updated':  'updateSnapshot'
+    'channel.joined':           'channelJoined',
+    'user.added':               'userAdded',
+    'user.removed':             'userRemoved',
+    'snapshot.updated':         'updateSnapshot',
+    'user.update_idle_status':  'updateIdleStatus'
   },
   
   channelJoined: function(data) {
@@ -19,7 +20,14 @@ module.exports = Flux.createStore({
     
     // Populate current user
     var current_user = UserStore.user;
-    this.items[current_user.id] = { id: current_user.id, email: current_user.email, name: current_user.name, snapshot: current_user.snapshot, me: true }
+    this.items[current_user.id] = { 
+      id: current_user.id, 
+      email: current_user.email, 
+      name: current_user.name, 
+      snapshot: current_user.snapshot, 
+      me: true,
+      idle_status: 'active'
+    }
     
     var me = false;
     var self = this;
@@ -28,7 +36,13 @@ module.exports = Flux.createStore({
     _.each(data.members, function(member, user_id) {
       if (current_user.id != user_id) {
         console.log(member)
-        self.items[user_id] = { id: user_id, email: member.email, name: member.name, me: false};
+        self.items[user_id] = { 
+          id: user_id, 
+          email: member.email, 
+          name: member.name, 
+          me: false,
+          idle_status: 'active'
+        };
       }
     });
     
@@ -37,7 +51,14 @@ module.exports = Flux.createStore({
   
   userAdded: function(data) {
     console.log('adding user to store');
-    this.items[data.id] = { id: data.id, email: data.info.email, name: data.info.name, snapshot: null, me: false };
+    this.items[data.id] = { 
+      id: data.id, 
+      email: data.info.email, 
+      name: data.info.name, 
+      snapshot: null, 
+      me: false, 
+      idle_status: 'active'
+    };
     this.emit('change');
   },
   
@@ -56,4 +77,9 @@ module.exports = Flux.createStore({
   getCurrentUser: function() {
     return _.findWhere(this.items, {me: true});
   },
+  
+  updateIdleStatus: function(data) {
+    this.items[data.user_id].idle_status = data.idle_status
+    this.emit('change');
+  }
 });

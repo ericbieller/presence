@@ -13,6 +13,7 @@
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.1",
     "browserify": "^13.0.0",
+    "classnames": "^2.2.5",
     "delorean": "^0.9.3",
     "envs": "^0.1.6",
     "es6-promise": "^3.2.1",

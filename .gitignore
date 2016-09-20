@@ -8,6 +8,7 @@ _SpecRunner.html
 __benchmarks__
 build/
 dist/
+dist/*
 coverage/
 .module-cache
 *.gem

@@ -96,6 +96,25 @@ var UserActions = {
       this.channel.bind('client-update_snapshot', function(data) {
         self.updateUserSnapshot(data);
       });
+      
+      this.channel.bind('client-update_idle_status', function(data) {
+        self.updateUserIdleStatus(data);
+      });      
+    },
+    
+    // Update MY status
+    updateIdleStatus: function(data) {
+      AppDispatcher.dispatch('user.update_idle_status', data);
+      this.sendIdleStatus(data)
+    },
+    
+    // Update OTHERS status
+    updateUserIdleStatus: function(data) {
+        AppDispatcher.dispatch('user.update_idle_status', data);
+    },
+    
+    sendIdleStatus: function(data) {
+      this.channel.trigger('client-update_idle_status', {user_id: data.user_id, idle_status: data.idle_status});
     }
 }
 
