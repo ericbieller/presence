@@ -17,8 +17,10 @@ var Main = React.createClass({
       case 'signup':
         return <Signup />
       case 'login':
-      default:
         return <Login app={app} />;
+      case 'loading':
+      default:
+        return <div>LOADING</div>
     }
   },
 

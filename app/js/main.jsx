@@ -6,11 +6,14 @@ var ReactDOM = require("react-dom");
 var UserActions = require("./actions/user-actions.js");
 var App = require("./components/app.jsx");
 var Login = require('./components/login.jsx');
+var Auth = require('./services/auth-service');
 
 // See if user is already logged in
 var token = localStorage.getItem('token');
 if (token) {
-  UserActions.login(token);
+  Auth.login({token: token});
+} else {
+  AppDispatcher.dispatch('app.show', 'login');
 }
 
 // Enable pusher logging - don't include this in production

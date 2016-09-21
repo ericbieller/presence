@@ -2,7 +2,7 @@ var Flux = require('delorean').Flux;
 
 module.exports = Flux.createStore({
     scheme: {
-        content: 'login',
+        content: 'loading',
         banner_style: 'info',
         banner_message: null,
         banner_timeout: 10*1000
@@ -14,8 +14,7 @@ module.exports = Flux.createStore({
       'banner.close':   'closeBanner'
     },
     
-    show: function(page) {
-      console.log('show!');      
+    show: function(page) {  
       this.set({content: page});
     },
     

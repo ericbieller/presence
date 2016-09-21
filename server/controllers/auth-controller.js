@@ -14,30 +14,45 @@ router.route("/users/create").post(createUser);
 function createSession(req, res) {
   var email = req.body.email;
   var password = req.body.password;
+  var token = req.body.token;
   
-  if (!email || !password) {
-    return res.status(401).send("Please enter both an email and a password!");
-  }
-
-  var user = User.findOne({email: email}, function(err, user) {
-    if (user) {
-      var user = user.toObject();
-
-      if (!bcrypt.compareSync(password, user.password)){
-        return res.status(401).send("Invalid username / password combo!");
+  // If there's a token, this means the user has previously logged in
+  // so we verify 
+  if (token) {
+    jwt.verify(token, config.secret, function(err, decoded) {
+      if (err) {
+        res.status(401);
+      } else {
+        res.status(201).send({
+          id_token: createToken(decoded)
+        });
       }
-      // Save user session data
-      req.session.user_id = user._id;
-      req.session.email = email;
-      req.session.name = user.name;
-      
-      res.status(201).send({
-        id_token: createToken(user)
-      });
-    } else {
-      return res.status(401).send("Invalid email / password combo!");
+    });
+  } else {
+    if (!email || !password) {
+      return res.status(401).send("Please enter both an email and a password!");
     }
-  });
+
+    var user = User.findOne({email: email}, function(err, user) {
+      if (user) {
+        var user = user.toObject();
+
+        if (!bcrypt.compareSync(password, user.password)){
+          return res.status(401).send("Invalid username / password combo!");
+        }
+        // Save user session data
+        req.session.user_id = user._id;
+        req.session.email = email;
+        req.session.name = user.name;
+      
+        res.status(201).send({
+          id_token: createToken(user)
+        });
+      } else {
+        return res.status(401).send("Invalid email / password combo!");
+      }
+    });
+  }
 }
 
 function createToken(user) {

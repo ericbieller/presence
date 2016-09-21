@@ -22,7 +22,7 @@ var Login = React.createClass({
   
   handleSubmit: function(e) {
     e.preventDefault();
-    Auth.login(this.state.email, this.state.password);
+    Auth.login({email: this.state.email, password: this.state.password});
   },
   
   handleEmailChange: function(e) {

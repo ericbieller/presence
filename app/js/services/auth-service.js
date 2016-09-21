@@ -7,12 +7,12 @@ var signupResourceUrl = "/api/users/create";
 var bcrypt = require('bcryptjs');
 
 module.exports = {
-  login: function(email, password) {
+  login: function(data) {
     var Promise = promise.Promise;
     return new Promise(function (resolve, reject) {
         $.ajax({
             url: loginResourceUrl,
-            data: JSON.stringify({email, password}),
+            data: JSON.stringify(data),
             method: "POST",
             dataType: "json",
             contentType: "application/json",
