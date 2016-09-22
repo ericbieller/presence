@@ -11,5 +11,6 @@ module.exports = Flux.createStore({
     
     showError: function(message) {
       this.set({error: message})
+      this.emit('change');
     }
 });

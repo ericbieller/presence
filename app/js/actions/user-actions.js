@@ -24,13 +24,17 @@ var UserActions = {
       var current_user = UserStore.user;
       
       // Remove token from local storage
-      localStorage.removeItem('token');
+      this.destroySession();
       
       // Disconnect pusher
       this.pusher.unsubscribe('presence-' + current_user.organization_id);
       
       // Show app now that user is logged in
       AppDispatcher.dispatch('app.show', 'login');
+    },
+    
+    destroySession: function() {
+      localStorage.removeItem('token');
     },
     
     channelJoined: function(data) {

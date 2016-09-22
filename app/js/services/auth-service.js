@@ -21,7 +21,13 @@ module.exports = {
               UserActions.login(token);
             },
             error: function(response) {
-              console.log("error: " + response.responseText)
+              // Log error
+              console.log("error: " + response.responseText);
+              
+              // Make sure user is logged out
+              UserActions.destroySession();
+              
+              // Show auth error to user
               AuthActions.showError(response.responseText);
             }
         });

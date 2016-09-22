@@ -21,9 +21,9 @@ function createSession(req, res) {
   if (token) {
     jwt.verify(token, config.secret, function(err, decoded) {
       if (err) {
-        res.status(401);
+        return res.status(401).send(err.message)
       } else {
-        res.status(201).send({
+        return res.status(201).send({
           id_token: createToken(decoded)
         });
       }
