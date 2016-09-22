@@ -21,9 +21,6 @@ module.exports = {
               UserActions.login(token);
             },
             error: function(response) {
-              // Log error
-              console.log("error: " + response.responseText);
-              
               // Make sure user is logged out
               UserActions.destroySession();
               
