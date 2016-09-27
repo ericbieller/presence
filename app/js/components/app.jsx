@@ -21,9 +21,14 @@ var App = React.createClass({
   
   componentDidMount: function() {
     // Setup event for tracking user's system idle status
-    addEventListener('update-state', function(e) {
+    addEventListener('update-status', function(e) {
       var current_user = UsersStore.getCurrentUser();
       UserActions.updateIdleStatus({user_id: current_user.id, idle_status: e.detail.idle_status});
+    });
+    
+    addEventListener('received-answer', function(e) {
+      console.log('answer received: ' + e.detail.answer)
+      UserActions.sendCallResponse(e.detail);
     });
   }
 });

@@ -78,6 +78,10 @@ module.exports = Flux.createStore({
     return _.findWhere(this.items, {me: true});
   },
   
+  getUser: function(user_id) {
+    return this.items[user_id];
+  },
+  
   updateIdleStatus: function(data) {
     this.items[data.user_id].idle_status = data.idle_status
     this.emit('change');

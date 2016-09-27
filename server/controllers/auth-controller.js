@@ -21,6 +21,8 @@ function createSession(req, res) {
   if (token) {
     jwt.verify(token, config.secret, function(err, decoded) {
       if (err) {
+        var error_message = err.message;
+        console.log(err.name)
         if (err.name == 'JsonWebTokenError') {
           error_message = 'Session expired, please relogin';
         }

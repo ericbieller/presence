@@ -3,17 +3,19 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var path = require("path");
 var session = require("express-session");
-var Router = require('react-router')
+var Router = require('react-router');
+var config = require('./server/config');
 
 //controllers
 var AuthController = require("./server/controllers/auth-controller");
 var PusherController = require("./server/controllers/pusher-controller");
+var CallsController = require("./server/controllers/calls-controller");
 
 //Express request pipeline
 var app = express();
 app.env = app.get('env');
 app.use(session({
-  secret: 'keyboard cat',
+  secret: config.secret,
   resave: false,
   saveUninitialized: false
 }))
@@ -24,6 +26,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use("/api", AuthController);
 app.use("/api", PusherController);
+app.use("/api", CallsController);
 app.get('*', function (request, response){
   response.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
 });

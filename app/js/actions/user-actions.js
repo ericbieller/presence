@@ -1,5 +1,5 @@
 var AppDispatcher = require('../dispatcher/app-dispatcher.js');
-var UserActions = require('../actions/user-actions.js');
+var AppActions = require('../actions/app-actions.js');
 var UserStore = require('../stores/user-store');
 import { browserHistory } from 'react-router';
 
@@ -103,7 +103,18 @@ var UserActions = {
       
       this.channel.bind('client-update_idle_status', function(data) {
         self.updateUserIdleStatus(data);
-      });      
+      });
+      
+      this.channel.bind('client-incoming_call', function(data) {
+        console.log('incoming call received!')
+        AppActions.showIncomingCall(data);
+      });
+      
+      this.channel.bind('client-call_response', function(data) {
+        console.log('Response received!')
+        console.log(data);
+        AppActions.handleCallAnswer(data);
+      });
     },
     
     // Update MY status
@@ -119,6 +130,15 @@ var UserActions = {
     
     sendIdleStatus: function(data) {
       this.channel.trigger('client-update_idle_status', {user_id: data.user_id, idle_status: data.idle_status});
+    },
+    
+    sendIncomingCall: function(data) {
+      console.log('sending pusher incoming call')
+      this.channel.trigger('client-incoming_call', data);
+    },
+    
+    sendCallResponse: function(data) {
+      this.channel.trigger('client-call_response', data);
     }
 }
 

@@ -19,7 +19,7 @@
   "content_scripts": [
     {
       "matches": ["*://localhost/*"],
-      "js": ["presence-detector.js"]
+      "js": ["listeners.js"]
     }
   ],
   "background": {
@@ -27,8 +27,9 @@
   },
   "permissions": [
     "idle",
-    "activeTab",
     "https://ajax.googleapis.com/",
-    "tabs"
+    "tabs",
+    "notifications",
+    "http://localhost/*"
   ]
 }

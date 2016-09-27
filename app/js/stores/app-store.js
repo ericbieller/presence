@@ -5,13 +5,17 @@ module.exports = Flux.createStore({
         content: 'loading',
         banner_style: 'info',
         banner_message: null,
-        banner_timeout: 10*1000
+        banner_timeout: 10*1000,
+        extension_id: "hbjenejhlinpfeddbgkglbenihfngopj"
     },
     
     actions: {
-      'app.show':       'show',
-      'banner.error':   'showErrorBanner',
-      'banner.close':   'closeBanner'
+      'app.show':           'show',
+      'banner.error':       'showErrorBanner',
+      'banner.close':       'closeBanner',
+      'incoming_call.show': 'showIncomingCall',
+      'call.accepted':      'startCall',
+      'call.ignored':       'cancelCall'
     },
     
     show: function(page) {  
@@ -33,4 +37,20 @@ module.exports = Flux.createStore({
         banner_param: null
       });
     },
+    
+    showIncomingCall: function(data) {
+      // Send user data to show notification from extension
+      chrome.runtime.sendMessage(this.state.extension_id, {
+        type: "incoming-call",
+        call_info: data
+      });
+    },
+    
+    startCall: function() {
+      console.log('start call')
+    },
+    
+    cancelCall: function() {
+      console.log('cancel call')
+    }
 });

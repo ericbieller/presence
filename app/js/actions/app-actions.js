@@ -11,6 +11,20 @@ var AppActions = {
     
     bannerClose: function() {
       AppDispatcher.dispatch('banner.close');
+    },
+    
+    showIncomingCall: function(data) {
+      AppDispatcher.dispatch('incoming_call.show', data);
+    },
+    
+    handleCallAnswer: function(data) {
+      if (data.answer == true) {
+        console.log('send call.accepted')
+        AppDispatcher.dispatch('call.accepted', data);
+      } else {
+        console.log('send call.ignored')
+        AppDispatcher.dispatch('call.ignored', data);
+      }
     }
 }
 

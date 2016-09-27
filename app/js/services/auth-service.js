@@ -2,9 +2,10 @@ var $ = require("jquery");
 var promise = require("es6-promise");
 var UserActions = require("../actions/user-actions.js");
 var AuthActions = require("../actions/auth-actions.js");
+var bcrypt = require('bcryptjs');
+
 var loginResourceUrl = "/api/sessions/create";
 var signupResourceUrl = "/api/users/create";
-var bcrypt = require('bcryptjs');
 
 module.exports = {
   login: function(data) {
